@@ -2,7 +2,6 @@
 #include<math.h>
 #include<stdlib.h>
 #include<string.h>
-int sum(int x, int y);
 double aver(double* a, double k)
 {
    double temp = 0;

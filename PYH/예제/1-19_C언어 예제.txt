@@ -1031,7 +1031,7 @@ int main(void)
 	char str[80];
 
 	printf("문자열 입력 : ");
-	gets(str);
+	gets_s(str);
 	puts("입력된 문자열 : ");
 	puts(str);
 

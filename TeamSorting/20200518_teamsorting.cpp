@@ -1,17 +1,22 @@
-#include<stdio.h>
-#include<stdlib.h>
-#define exernum 2
-/*typedef struct
-{
-	int team_id;
-	char team_name[20];
-	char company[20];
+#define _CRT_SECURE_NO_WARNINGS
 
-}team;*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Team
+{
+	int id;
+	char name[20];
+	char company[20];
+};
+
 int main()
 {
-	int sel1,sel2,sel3;
-	
+	Team t[10];
+	int tnum = 0;
+	int sel1, sel2;
+
 	while (1)
 	{
 		printf("1. 정보 수정\n");
@@ -22,7 +27,7 @@ int main()
 		{
 		case 1:
 			system("cls");
-			printf("1. 팀 정보 입력\n");
+			printf("1. 팀 정보 추가\n");
 			printf("2. 팀 정보 수정\n");
 			printf("3. 팀 정보 삭제\n");
 			scanf("%d", &sel2);
@@ -30,6 +35,18 @@ int main()
 			{
 			case 1:
 				//이채원
+				if (tnum > 10)
+				{
+					printf("더이상 추가할 수 없습니다.\n\n");
+					break;
+				}
+				getchar();
+				printf("팀명을 입력해주세요[19자까지 입력가능] : ");
+				fgets(t[tnum].name, sizeof(t[tnum].name), stdin);
+				printf("회사명을 입력해주세요[19자까지 입력가능] : ");
+
+				fgets(t[tnum].company, sizeof(t[tnum].company), stdin);
+				t[tnum].id = ++tnum;
 				break;
 			case 2:
 				//박윤화
@@ -46,8 +63,8 @@ int main()
 				printf("1. ID순으로 정렬\n");
 				printf("2. 팀명순으로 정렬\n");
 				printf("3. 회사명순으로 정렬\n");
-				scanf("%d", &sel3);
-				switch (sel3)
+				scanf("%d", &sel2);
+				switch (sel2)
 				{
 				case 1:
 
@@ -58,17 +75,16 @@ int main()
 				case 3:
 					break;
 				default:
-					printf("값을 다시 입력해주세요\n");
+					printf("값을 다시 입력해주세요.\n");
 					continue;
 				}
 				break;
 			}
 		case 3:
+			printf("프로그램이 종료됩니다.\n");
 			exit(0);
 			break;
 		}
-		
-	
 	}
 	return 0;
 }

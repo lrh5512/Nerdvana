@@ -4,16 +4,19 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX 10
+#define MAXLEN 20
+
 struct Team
 {
 	int id;
-	char name[20];
-	char company[20];
+	char name[MAXLEN];
+	char company[MAXLEN];
 };
 
 int main()
 {
-	Team t[10];
+	Team t[MAX];
 	int tnum = 0;
 	int sel1, sel2;
 
@@ -35,18 +38,18 @@ int main()
 			{
 			case 1:
 				//이채원
-				if (tnum > 10)
+				if (tnum > MAX)
 				{
 					printf("더이상 추가할 수 없습니다.\n\n");
 					break;
 				}
 				getchar();
 				printf("팀명을 입력해주세요[19자까지 입력가능] : ");
-				fgets(t[tnum].name, sizeof(t[tnum].name), stdin);
+				fgets(t[tnum].name, MAXLEN, stdin);
 				printf("회사명을 입력해주세요[19자까지 입력가능] : ");
 
-				fgets(t[tnum].company, sizeof(t[tnum].company), stdin);
-				t[tnum].id = ++tnum;
+				fgets(t[tnum].company, MAXLEN, stdin);
+				t[tnum].id = tnum++;
 				break;
 			case 2:
 				//박윤화
@@ -64,6 +67,7 @@ int main()
 				printf("2. 팀명순으로 정렬\n");
 				printf("3. 회사명순으로 정렬\n");
 				scanf("%d", &sel2);
+				//이로운
 				switch (sel2)
 				{
 				case 1:
@@ -88,10 +92,10 @@ int main()
 						{
 							if (strcmp(t[j].name, t[j + 1].name) == 1)
 							{
-								char temp[20];
-								strcpy(temp, t[j].name);
-								strcpy(t[j].name, t[j + 1].name);
-								strcpy(t[j + 1].name, temp);
+								Team temp;
+								temp = t[j];
+								t[j] = t[j + 1];
+								t[j + 1] = temp;
 							}
 						}
 					}

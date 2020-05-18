@@ -67,12 +67,49 @@ int main()
 				switch (sel2)
 				{
 				case 1:
-
+					for (int i = 0; i < tnum - 1; i++)
+					{
+						for (int j = 0; j < tnum - 1 - i; j++)
+						{
+							if (t[j].id > t[j + 1].id)
+							{
+								int temp;
+								temp = t[j].id;
+								t[j].id = t[j + 1].id;
+								t[j + 1].id = temp;
+							}
+						}
+					}
 					break;
 				case 2:
-
+					for (int i = 0; i < tnum - 1; i++)
+					{
+						for (int j = 0; j < tnum - 1 - i; j++)
+						{
+							if (strcmp(t[j].name, t[j + 1].name) == 1)
+							{
+								char temp[20];
+								strcpy(temp, t[j].name);
+								strcpy(t[j].name, t[j + 1].name);
+								strcpy(t[j + 1].name, temp);
+							}
+						}
+					}
 					break;
 				case 3:
+					for (int i = 0; i < tnum - 1; i++)
+					{
+						for (int j = 0; j < tnum - 1 - i; j++)
+						{
+							if (strcmp(t[j].company, t[j + 1].company) == 1)
+							{
+								char temp[20];
+								strcpy(temp, t[j].company);
+								strcpy(t[j].company, t[j + 1].company);
+								strcpy(t[j + 1].company, temp);
+							}
+						}
+					}
 					break;
 				default:
 					printf("값을 다시 입력해주세요.\n");

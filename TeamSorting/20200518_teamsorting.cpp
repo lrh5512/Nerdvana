@@ -24,7 +24,7 @@ int main()
 
 	while (1)
 	{
-		printf("1. 정보 수정\n");
+		printf("1. 정보 추가/수정\n");
 		printf("2. 팀 정렬\n");
 		printf("3. 프로그램 종료\n");
 		scanf("%d", &sel1);

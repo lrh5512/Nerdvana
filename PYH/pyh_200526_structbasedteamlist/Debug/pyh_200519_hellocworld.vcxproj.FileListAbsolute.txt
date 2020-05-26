@@ -1,0 +1,2 @@
+C:\Users\USER\source\repos\pyh_200519_hellocworld\Debug\pyh_200519_hellocworld.exe
+C:\Users\USER\source\repos\pyh_200519_hellocworld\Debug\pyh_200519_hellocworld.pdb

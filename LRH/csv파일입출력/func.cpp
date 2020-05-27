@@ -1,9 +1,9 @@
 #include"Init.h"
 void SearchByName(Info* k, char* input)
 {
-	int a[StuNum] = { 0 };
+	int a[RowNum] = { 0 };
 	int offset = 0;
-	for (int i = 0; i < StuNum; i++)
+	for (int i = 0; i < RowNum; i++)
 	{
 		if (!strcmp(k[i].name, input))
 		{
@@ -18,16 +18,19 @@ void SearchByName(Info* k, char* input)
 		getchar();
 	}
 	else
+	{
+		print_time();
 		for (int i = 0; i < offset; i++)
 		{
 			print_info(k[a[i]]);
 		}
+	}
 }
 void SearchByCom(Info* k, char* input)
 {
-	int a[StuNum] = { 0 };
+	int a[RowNum] = { 0 };
 	int offset = 0;
-	for (int i = 0; i < StuNum; i++)
+	for (int i = 0; i < RowNum; i++)
 	{
 		if (!strcmp(k[i].company, input))
 		{
@@ -42,16 +45,21 @@ void SearchByCom(Info* k, char* input)
 		getchar();
 	}
 	else
+	{
+		print_time();
 		for (int i = 0; i < offset; i++)
 		{
 			print_info(k[a[i]]);
 		}
+	}
 }
 void SearchBySchool(Info* k, char* input)
 {
-	int a[StuNum] = { 0 };
+	int a[RowNum] = { 0 };
 	int offset = 0;
-	for (int i = 0; i < StuNum; i++)
+
+	
+	for (int i = 0; i < RowNum; i++)
 	{
 		if (!strcmp(k[i].school, input))
 		{
@@ -66,16 +74,19 @@ void SearchBySchool(Info* k, char* input)
 		getchar();
 	}
 	else
+	{
+		print_time();
 		for (int i = 0; i < offset; i++)
 		{
 			print_info(k[a[i]]);
 		}
+	}	
 }
 void SearchByLeader(Info* k, char* input)
 {
-	int a[StuNum] = { 0 };
+	int a[RowNum] = { 0 };
 	int offset = 0;
-	for (int i = 0; i < StuNum; i++)
+	for (int i = 0; i < RowNum; i++)
 	{
 		if (!strcmp(k[i].name, input))
 		{
@@ -94,7 +105,10 @@ void SearchByLeader(Info* k, char* input)
 		for (int i = 0; i < offset; i++)
 		{
 			if (k[a[i]].lea)
+			{
+				print_time();
 				SearchByCom(k, k[a[i]].company);
+			}
 			else {
 				printf("%s은(는) 조장이 아닙니다\n아무키나 눌러주세요", k[a[i]].name);
 				getchar();
@@ -102,34 +116,44 @@ void SearchByLeader(Info* k, char* input)
 			}
 		}
 }
-
-void print_info(Info k)
+void print_time()
 {
-	FILE *fp = fopen("result.txt", "a");
-	if (k.lea)
-		fprintf(fp,"조장  %s  %s  %s  %s  %s\n", k.company, k.name, k.email, k.school, k.major);
-	else
-		fprintf(fp,"팀원  %s  %s  %s  %s  %s\n", k.company, k.name, k.email, k.school, k.major);
+	FILE* fp = fopen("result.txt", "a");
+	time_t ti;
+	struct tm* t;
+	ti = time(NULL);
+	t = localtime(&ti);
+	fprintf(fp,"검색 시간 : %d시 %d분\n", t->tm_hour, t->tm_min);
 	fclose(fp);
 }
-int ReadCsvFile(char* path, Info *in)
+void print_info(Info k)
+{
+	FILE* fp = fopen("result.txt", "a");
+
+	if (k.lea)
+		fprintf(fp, "조장  %s  %s  %s  %s  %s\n", k.company, k.name, k.email, k.school, k.major);
+	else
+		fprintf(fp, "팀원  %s  %s  %s  %s  %s\n", k.company, k.name, k.email, k.school, k.major);
+	fclose(fp);
+}
+int ReadCsvFile(char* path, Info* in)
 {
 	int err;
-	FILE* fp1; 
+	FILE* fp1;
 	char tmp[256];
-	char *com;
+	char* com;
 	char str[MAXLINE];
 	char st;
 	int i = 0;
 	memset(str, '\0', MAXLINE);
 	err = fopen_s(&fp1, path, "r");
 	fgets(tmp, 256, fp1);
-	for (int t = 0; t < StuNum; t++)
+	for (int t = 0; t < RowNum; t++)
 	{
 		while (fgetc(fp1) == ',')
 			;
 		fseek(fp1, -1, SEEK_CUR);
-		for (int comma = 0; comma < 6;)
+		for (int comma = 0; comma < ColNum;)
 		{
 			st = fgetc(fp1);
 			if (st == '?' || st == '\n')
@@ -163,6 +187,8 @@ int ReadCsvFile(char* path, Info *in)
 		}
 
 	}
+	
 	fclose(fp1);
 	return 0;
 }
+
